@@ -1163,9 +1163,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Vitalita
-
-'
+  m_Text: "V\xFDdr\u017E"
 --- !u!222 &610786989
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3020,7 +3018,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1177389563}
   m_HandleRect: {fileID: 150238981}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.1
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0.5
