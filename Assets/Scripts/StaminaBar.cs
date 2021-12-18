@@ -53,7 +53,7 @@ public class StaminaBar : MonoBehaviour
         {
             currentStamina += maxStamina / 100;
             staminaBar.value = currentStamina;
-            if(currentStamina == maxStamina)
+            if(currentStamina >= maxStamina)
                 hasStamina = true;
             yield return regenTick;
         }

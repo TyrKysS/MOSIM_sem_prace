@@ -19,19 +19,13 @@ public class SliderScript : MonoBehaviour
         _sliderAge.onValueChanged.AddListener((v)=> {
             _sliderTextAge.text = v.ToString("0");
 
-            Movement.age = float.Parse(v.ToString("0"));
+            Movement.sliderAge = float.Parse(v.ToString("0"));
         });
 
         _sliderSpeed.onValueChanged.AddListener((v)=> {
             _sliderTextSpeed.text = v.ToString("0.00");
             
-            Movement.speed = float.Parse(v.ToString("0.00"));
-        });
-
-        _sliderFitness.onValueChanged.AddListener((v)=> {
-            _sliderTextFitness.text = v.ToString("0.00");
-
-            Movement.fitness = float.Parse(v.ToString("0.0"));
+            Movement.sliderSpeed = float.Parse(v.ToString("0.00"));
         });
     }
 
