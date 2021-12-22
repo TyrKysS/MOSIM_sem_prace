@@ -121,6 +121,8 @@ public class Movement : MonoBehaviour
                 //agent.SetDestination(treasure.position);
                 distance = Vector3.Distance(agent.transform.position,treasure.transform.position);
                 StaminaBar.instance.useStamina(speedEnergy);
+                Debug.Log(distance+"    "+agent.speed);
+                stopTimer();
             }
             else if(direction == "Relax" && distance >= 1.2 && StaminaBar.hasStamina == true)
             {
@@ -128,6 +130,8 @@ public class Movement : MonoBehaviour
                 //agent.SetDestination(relax.position);
                 distance = Vector3.Distance(agent.transform.position,relax .transform.position);
                 StaminaBar.instance.useStamina(speedEnergy);
+                Debug.Log(distance);
+                stopTimer();
             }
             else if(direction == "ByUser" && StaminaBar.hasStamina == true)
             {
@@ -154,12 +158,17 @@ public class Movement : MonoBehaviour
                 if(isDirection)
                     StaminaBar.instance.useStamina(speedEnergy);
             }
-            else if(distance <= 1.3 && agent.speed == 0)
-                Timer.timerActive = false;
+            
         }
         else
             agent.isStopped = true;
         
+    }
+
+    private void stopTimer()
+    {
+        if(distance <= 1.3)
+                Timer.timerActive = false;
     }
     private void DestionationByUser()
     {
