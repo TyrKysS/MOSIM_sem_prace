@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
     private float age = 0;
     private bool isDirection = false;
     private float radius = 2f;
-    private int m = 17;
+    private int m = 16;
     private int n = 7;
     
     void Start()
@@ -48,7 +48,7 @@ public class Movement : MonoBehaviour
         int likeFishing = Skills.likeFishing ? 1 : 0;
         int likeSwimming = Skills.likeSwimming ? 1 : 0;
 
-        int[,] a = new int[17,7]
+        int[,] a = new int[16,7]
         {//táboření  houbaření  plavání  rybaření  les  mosty  voda
             {1,         0,          0,      0,      2,      2,  5},
             {1,         1,          0,      0,      1,      2,  5},
@@ -61,7 +61,6 @@ public class Movement : MonoBehaviour
             {0,         1,          0,      0,      1,      2,  20},
             {0,         1,          1,      0,      1,      2,  1},
             {0,         1,          1,      1,      1,      1,  1},
-            {0,         1,          0,      1,      3,      1,  10},
             {0,         0,          1,      0,     10,      2,  1},
             {0,         0,          1,      1,     10,      1,  1},
             {0,         1,          0,      1,     1,       1,  10},
