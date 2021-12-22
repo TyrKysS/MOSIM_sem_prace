@@ -7,28 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
-
-    [SerializeField] private Slider sliderTimer;
-    [SerializeField] private Text sliderTextTimer;
-
     public static bool timerActive = false;
     public static bool resetSimulation = false;
     float currentTime;
-    public float startMinutes;
     public Text currentTimeText;
-    public float setTimer;
     
     // Start is called before the first frame update
     void Start()
-    {
-        sliderTimer.onValueChanged.AddListener((v) => {
-            startMinutes = float.Parse(v.ToString("0"));
-            //Debug.Log(v.ToString("0"));
-            currentTime = startMinutes * 0.5f;
-            //Debug.Log(currentTime);
-        });
-        
-        
+    {   
+        currentTime = 0;   
     }
 
     // Update is called once per frame
@@ -36,14 +23,11 @@ public class Timer : MonoBehaviour
     {
         if(timerActive == true)
         {
-            currentTime = currentTime - Time.deltaTime;
-            if(currentTime <= 0)
-            {
-                timerActive = false;
-            }
+            currentTime = currentTime + Time.deltaTime;
+            
         }
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
-        currentTimeText.text = time.Minutes.ToString()+":"+time.Seconds.ToString();
+        currentTimeText.text = time.ToString(@"mm\:ss\:fff");
     }
 
     public void StartTimer()
@@ -56,6 +40,7 @@ public class Timer : MonoBehaviour
     }
     public void resetButton()
     {
+        timerActive = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

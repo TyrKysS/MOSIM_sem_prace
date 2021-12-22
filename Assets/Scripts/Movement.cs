@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     public NavMeshAgent agent;
     public Transform treasure;
     public Transform relax;
-    public static float sliderSpeed = 0;
+    public static float sliderSpeed = 0.25f;
     public static float sliderAge = 5f;
     public Camera cam;
 
@@ -100,7 +100,7 @@ public class Movement : MonoBehaviour
         
 
 
-        agent.isStopped = true;
+        //agent.isStopped = true;
         if(direction == "Treasure")
             agent.SetDestination(treasure.position);
         else if(direction == "Relax")
@@ -148,12 +148,13 @@ public class Movement : MonoBehaviour
                 if(distance <= 1.2)
                 {
                     isDirection = false;
+                    Timer.timerActive = false;
                 }
                     
                 if(isDirection)
                     StaminaBar.instance.useStamina(speedEnergy);
             }
-            else if(distance <= 1.3)
+            else if(distance <= 1.3 && agent.speed == 0)
                 Timer.timerActive = false;
         }
         else
