@@ -25,7 +25,7 @@ public class StaminaBar : MonoBehaviour
         staminaBar.maxValue = maxStamina;
         staminaBar.value = maxStamina;
     }
-
+    //použití staminy
     public void  useStamina(float amount)
     {
         if(currentStamina - amount >= 0)
@@ -44,7 +44,7 @@ public class StaminaBar : MonoBehaviour
             hasStamina = false;
         }
     }
-
+    // obnova st aminy
     private IEnumerator RegenStamina()
     {
         yield return new WaitForSeconds(2);

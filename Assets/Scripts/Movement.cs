@@ -43,11 +43,13 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        // zjištění zda jsou nebo nejsou dovednosti a které zaškrtnuty
         int likeCamping = Skills.likeCamping ? 1 : 0;
         int likeMushroms = Skills.likeMushroms ? 1 : 0;
         int likeFishing = Skills.likeFishing ? 1 : 0;
         int likeSwimming = Skills.likeSwimming ? 1 : 0;
 
+        // Dovednostní matice určující ceny cest podle zaškrtnutých dovedností
         int[,] a = new int[16,7]
         {//táboření  houbaření  plavání  rybaření  les  mosty  voda
             {1,         0,          0,      0,      2,      2,  5},
@@ -68,11 +70,12 @@ public class Movement : MonoBehaviour
             {0,         0,          0,      0,     10,      5,  20},
         };
 
+        // hledání řádku matice shodující se se zaškrtnutými dovednostmi
         for(int i = 0; i < m; i++)
             for(int j = 0; j < n; j++)
                 if(a[i,0] == likeCamping && a[i,1] == likeMushroms && a[i,2] == likeSwimming && a[i,3] == likeFishing)
                 {
-                    //Debug.Log(+a[i,4]+"______"+a[i,5]);
+                    // nastavení cen a výpis do mapy aktualní ceny cest
                     agent.SetAreaCost(3,a[i,4]);
                     agent.SetAreaCost(4,a[i,5]);
                     agent.SetAreaCost(5,a[i,6]);
@@ -83,7 +86,7 @@ public class Movement : MonoBehaviour
                     riverCost2.text = a[i,6].ToString();
 
                 }
-
+        // určení o kolik bude agent rychlejší nebo pomalejší dle věku
         if(sliderAge < 20)
             age = 0.4f;
         if(sliderAge >= 20 && sliderAge < 40)
@@ -92,14 +95,17 @@ public class Movement : MonoBehaviour
             age = 0.6f;
         if(sliderAge >= 60)
             age = 0.8f;
+        // výpočet konečné spotřeby energie agenta v závislosti rychlosti pohybu * věk
         speedEnergy = sliderSpeed*age;
+        // Uživatel volí rychlost agenta v intervalu 0.1 - 1 tak se tato hodnota pronásobuje *7
         agent.speed = sliderSpeed*7;
+
+        // volba cesty (výchozí je nastaveno volný pohyb)
         Toggle toggle = toggleGroup.ActiveToggles().FirstOrDefault();
+        // uložení cíle do hodnoty do směru cesty
         direction = toggle.name;
         
-
-
-        //agent.isStopped = true;
+        // volba cíle cesty k vykreslení čáry, kudyma agent půjde
         if(direction == "Treasure")
             agent.SetDestination(treasure.position);
         else if(direction == "Relax")
@@ -107,13 +113,15 @@ public class Movement : MonoBehaviour
         else if(direction == "ByUser")
             DestionationByUser();
 
-
+        // pokud se stiskne tlačítko start, spustí se taky stopky a agent se začne pohybovat, v opačném případě je pauza
         if(Timer.timerActive == true)
         {
+            // Pokud agent stojí nebo nemá energii (staminu) tak stojí
             if(agent.speed == 0 || StaminaBar.hasStamina == false)
             {
                 agent.isStopped = true;
             }
+            // zaškrtnuto tlačítko "hledání pokladu" jde k němu dokud má energii (staminu)
             else if(direction == "Treasure" && distance >= 1.2 && StaminaBar.hasStamina == true)
             {
                 agent.isStopped = false;
@@ -123,6 +131,7 @@ public class Movement : MonoBehaviour
                 Debug.Log(distance+"    "+agent.speed);
                 stopTimer();
             }
+            // zaškrtnuto tlačítko "odpočívadlo" jde k němu dokud má energii (staminu)
             else if(direction == "Relax" && distance >= 1.2 && StaminaBar.hasStamina == true)
             {
                 agent.isStopped = false;
@@ -132,6 +141,7 @@ public class Movement : MonoBehaviour
                 Debug.Log(distance);
                 stopTimer();
             }
+            // zaškrtnuto tlačítko "volitelná" jde k němu dokud má energii (staminu)
             else if(direction == "ByUser" && StaminaBar.hasStamina == true)
             {
                 agent.isStopped = false;
@@ -164,11 +174,13 @@ public class Movement : MonoBehaviour
         
     }
 
+    // Pokud je agent dostatečně blízko, stopky se zastaví
     private void stopTimer()
     {
         if(distance <= 1.3)
                 Timer.timerActive = false;
     }
+    // kliknutím v pamě se vykreslí čára ukazující cestu agenta k cíli
     private void DestionationByUser()
     {
         if(Input.GetMouseButtonDown(0))

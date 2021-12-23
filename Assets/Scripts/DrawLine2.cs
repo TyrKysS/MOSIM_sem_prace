@@ -9,7 +9,7 @@ public class DrawLine2 : MonoBehaviour
     private NavMeshAgent agent;
     private LineRenderer line;
     private List<Vector3> point;
-    // Start is called before the first frame update
+    // načtení komponent
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -17,7 +17,7 @@ public class DrawLine2 : MonoBehaviour
         line = GetComponent<LineRenderer>();
     }
 
-    // Update is called once per frame
+    // vykreslení čárý ukazující směr kudyma agent jde
     void Update()
     {
         line.positionCount = agent.path.corners.Length;

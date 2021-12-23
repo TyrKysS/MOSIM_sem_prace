@@ -12,13 +12,13 @@ public class Timer : MonoBehaviour
     float currentTime;
     public Text currentTimeText;
     
-    // Start is called before the first frame update
+    // začíná se od nuly
     void Start()
     {   
         currentTime = 0;   
     }
 
-    // Update is called once per frame
+    // stopky, pokud se stiskne tlačítko, začne se se odpočítavat, jinak stojí
     void Update()
     {
         if(timerActive == true)
@@ -30,6 +30,7 @@ public class Timer : MonoBehaviour
         currentTimeText.text = time.ToString(@"mm\:ss\:fff");
     }
 
+    // tlačítka start, stop stopek
     public void StartTimer()
     {
         timerActive = true;
@@ -38,6 +39,8 @@ public class Timer : MonoBehaviour
     {
         timerActive = false;
     }
+
+    // restart celé scény
     public void resetButton()
     {
         timerActive = false;

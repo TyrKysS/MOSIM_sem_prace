@@ -15,7 +15,7 @@ public class Skills : MonoBehaviour
     public Toggle fishing;
     public Toggle swimming;
 
-    // Start is called before the first frame update
+    // Přiřazení hodnot k přepínačům
     void Start()
     {
       camping.onValueChanged.AddListener(delegate {
@@ -34,10 +34,9 @@ public class Skills : MonoBehaviour
           ToggleValueChangedOccured(swimming, "swimming");
       });
     }
+    // Pokud je zaškrtnutu, přiřaď hodnotu proměnné TRUE/FALSE
     void ToggleValueChangedOccured (Toggle toggle, string type)
     {
-        //Debug.Log(type+" "+toggle.isOn);
-
         switch(type)
         {
             case "camping":
@@ -52,8 +51,6 @@ public class Skills : MonoBehaviour
             case "swimming":
                 likeSwimming = toggle.isOn;
                 break;
-            //default:
-              //  Debug.Log("Jiné možnosti neexistují");
         }
     }
 }

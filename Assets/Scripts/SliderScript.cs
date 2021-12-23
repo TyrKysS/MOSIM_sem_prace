@@ -10,12 +10,12 @@ public class SliderScript : MonoBehaviour
 
     [SerializeField] private Slider _sliderSpeed;
     [SerializeField] private Text _sliderTextSpeed;
-    // Start is called before the first frame update
+    // nastavení hodnot pro slidery (věk a rychlost)
     void Start()
     {
         _sliderAge.onValueChanged.AddListener((v)=> {
             _sliderTextAge.text = v.ToString("0");
-
+            // Hodnota se čte jako String, avšak pro další práci se převádí na Float
             Movement.sliderAge = float.Parse(v.ToString("0"));
         });
 
@@ -24,11 +24,5 @@ public class SliderScript : MonoBehaviour
             
             Movement.sliderSpeed = float.Parse(v.ToString("0.00"));
         });
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

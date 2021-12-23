@@ -6,20 +6,23 @@ using UnityEngine.AI;
 [RequireComponent(typeof(LineRenderer))]
 public class drawLine : MonoBehaviour
 {
+    /**
+        nepoužívá se, byly s polem
+    */
+
     private LineRenderer lineRenderer;
     public NavMeshAgent agent;
-    // Start is called before the first frame update
+
+    // vykreslení čáry
     void Start()
     {
-         //agent = GlobalVariables.agent;
         lineRenderer = GetComponent<LineRenderer>();
-
         lineRenderer.startWidth = 0.15f;
         lineRenderer.endWidth = 0.15f;
         lineRenderer.positionCount = 0;
 
     }
-
+    // vytvoření bodů, pomoci kterých se vykresluje čára
     void Update()
     {
         lineRenderer.positionCount = agent.path.corners.Length;
